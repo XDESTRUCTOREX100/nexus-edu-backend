@@ -8,7 +8,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { AsistenciaService } from './asistencia.service';
+import { AsistenciaService } from '../services/asistencia.service';
 import { CreateAsistenciaDto } from '../dto/asistencia/create-asistencia.dto';
 import { UpdateAsistenciaDto } from '../dto/asistencia/update-asistencia.dto';
 

@@ -8,7 +8,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { MatriculaService } from './matricula.service';
+import { MatriculaService } from '../services/matricula.service';
 import { CreateMatriculaDto } from '../dto/matricula/create-matricula.dto';
 import { UpdateMatriculaDto } from '../dto/matricula/update-matricula.dto';
 

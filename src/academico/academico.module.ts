@@ -1,35 +1,71 @@
 import { Module } from '@nestjs/common';
-import { MatriculaModule } from './matricula/matricula.module';
-import { InscripcionModule } from './inscripcion/inscripcion.module';
-import { CorteModule } from './corte/corte.module';
-import { CalificacionModule } from './calificacion/calificacion.module';
-import { ActividadModule } from './actividad/actividad.module';
-import { AsistenciaModule } from './asistencia/asistencia.module';
-import { RegistroAuditoriaModule } from './registro-auditoria/registro-auditoria.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-/**
- * AcademicoModule — Módulo raíz del proceso educativo operativo.
- * Agrupa: matrículas, inscripciones, cortes, calificaciones,
- * actividades, asistencias y auditoría.
- */
+// Entities
+import { Actividad } from './entities/actividad.entity';
+import { Asistencia } from './entities/asistencia.entity';
+import { Calificacion } from './entities/calificacion.entity';
+import { Corte } from './entities/corte.entity';
+import { Inscripcion } from './entities/inscripcion.entity';
+import { Matricula } from './entities/matricula.entity';
+import { RegistroAuditoria } from './entities/registro-auditoria.entity';
+
+// Controllers
+import { ActividadController } from './controllers/actividad.controller';
+import { AsistenciaController } from './controllers/asistencia.controller';
+import { CalificacionController } from './controllers/calificacion.controller';
+import { CorteController } from './controllers/corte.controller';
+import { InscripcionController } from './controllers/inscripcion.controller';
+import { MatriculaController } from './controllers/matricula.controller';
+import { RegistroAuditoriaController } from './controllers/registro-auditoria.controller';
+
+// Services
+import { ActividadService } from './services/actividad.service';
+import { AsistenciaService } from './services/asistencia.service';
+import { CalificacionService } from './services/calificacion.service';
+import { CorteService } from './services/corte.service';
+import { InscripcionService } from './services/inscripcion.service';
+import { MatriculaService } from './services/matricula.service';
+import { RegistroAuditoriaService } from './services/registro-auditoria.service';
+
 @Module({
   imports: [
-    MatriculaModule,
-    InscripcionModule,
-    CorteModule,
-    CalificacionModule,
-    ActividadModule,
-    AsistenciaModule,
-    RegistroAuditoriaModule,
+    TypeOrmModule.forFeature([
+      Actividad,
+      Asistencia,
+      Calificacion,
+      Corte,
+      Inscripcion,
+      Matricula,
+      RegistroAuditoria,
+    ]),
+  ],
+  controllers: [
+    ActividadController,
+    AsistenciaController,
+    CalificacionController,
+    CorteController,
+    InscripcionController,
+    MatriculaController,
+    RegistroAuditoriaController,
+  ],
+  providers: [
+    ActividadService,
+    AsistenciaService,
+    CalificacionService,
+    CorteService,
+    InscripcionService,
+    MatriculaService,
+    RegistroAuditoriaService,
   ],
   exports: [
-    MatriculaModule,
-    InscripcionModule,
-    CorteModule,
-    CalificacionModule,
-    ActividadModule,
-    AsistenciaModule,
-    RegistroAuditoriaModule,
+    ActividadService,
+    AsistenciaService,
+    CalificacionService,
+    CorteService,
+    InscripcionService,
+    MatriculaService,
+    RegistroAuditoriaService,
   ],
 })
 export class AcademicoModule {}

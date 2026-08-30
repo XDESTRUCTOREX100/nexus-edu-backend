@@ -8,7 +8,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ActividadService } from './actividad.service';
+import { ActividadService } from '../services/actividad.service';
 import { CreateActividadDto } from '../dto/actividad/create-actividad.dto';
 import { UpdateActividadDto } from '../dto/actividad/update-actividad.dto';
 
