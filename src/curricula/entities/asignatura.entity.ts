@@ -5,7 +5,7 @@ import { Horario } from './horario.entity';
 
 @Entity('asignaturas')
 export class Asignatura {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   id: number;
 
   @Column({ type: 'varchar', length: 30, unique: true })

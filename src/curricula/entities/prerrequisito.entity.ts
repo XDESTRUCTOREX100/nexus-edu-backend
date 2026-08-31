@@ -4,7 +4,7 @@ import { Asignatura } from './asignatura.entity';
 @Entity('prerrequisitos')
 @Index(['asignaturaId', 'asignaturaPrerrequisitoId'], { unique: true })
 export class Prerrequisito {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   id: number;
 
   @Column({ name: 'asignatura_id', type: 'int', unsigned: true })

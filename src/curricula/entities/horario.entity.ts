@@ -6,7 +6,7 @@ import { DiaSemana } from '../enums/academico.enums';
 
 @Entity('horarios')
 export class Horario {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   id: number;
 
   @Column({ name: 'asignatura_id', type: 'int', unsigned: true })

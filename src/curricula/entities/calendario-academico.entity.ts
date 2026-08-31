@@ -3,7 +3,7 @@ import { PeriodoAcademico } from './periodo-academico.entity';
 
 @Entity('calendario_academico')
 export class CalendarioAcademico {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   id: number;
 
   @Column({ name: 'periodo_id', type: 'int', unsigned: true })

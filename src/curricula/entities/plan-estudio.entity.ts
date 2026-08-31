@@ -4,7 +4,7 @@ import { EstadoPlanEstudio } from '../enums/academico.enums';
 
 @Entity('planes_estudio')
 export class PlanEstudio {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   id: number;
 
   @Column({ type: 'varchar', length: 30, unique: true })

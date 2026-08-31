@@ -4,7 +4,7 @@ import { TipoEspacioFisico } from '../enums/academico.enums';
 
 @Entity('espacios_fisicos')
 export class EspacioFisico {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   id: number;
 
   @Column({ type: 'varchar', length: 30, unique: true })
