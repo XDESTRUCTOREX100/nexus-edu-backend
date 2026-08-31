@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CurriculaModule } from './curricula/curricula.module';
+import { AcademicoModule } from './academico/academico.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CurriculaModule } from './curricula/curricula.module';
       synchronize: true, // Desactivar en producción
     }),
     CurriculaModule,
+    AcademicoModule,
   ],
 })
 export class AppModule {}
