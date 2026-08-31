@@ -1,119 +1,65 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCalendarioAcademicoDto } from '../dto/create-calendario-academico.dto';
 import { UpdateCalendarioAcademicoDto } from '../dto/update-calendario-academico.dto';
 import { CalendarioAcademico } from '../entities/calendario-academico.entity';
-import { PeriodoAcademico } from '../entities/periodo-academico.entity';
-import { EstadoPeriodoAcademico } from '../enums/academico.enums';
 
 @Injectable()
 export class CalendarioAcademicoService {
   constructor(
     @InjectRepository(CalendarioAcademico)
-    private readonly calendarioRepository: Repository<CalendarioAcademico>,
-    @InjectRepository(PeriodoAcademico)
-    private readonly periodosRepository: Repository<PeriodoAcademico>,
+    private readonly calendarioAcademicoRepository: Repository<CalendarioAcademico>,
   ) {}
 
-  findAll(): Promise<CalendarioAcademico[]> {
-    return this.calendarioRepository.find({
+  async create(
+    createCalendarioAcademicoDto: CreateCalendarioAcademicoDto,
+  ): Promise<CalendarioAcademico> {
+    const calendario = this.calendarioAcademicoRepository.create(
+      createCalendarioAcademicoDto,
+    );
+    return this.calendarioAcademicoRepository.save(calendario);
+  }
+
+  async findAll(): Promise<CalendarioAcademico[]> {
+    return this.calendarioAcademicoRepository.find({
       relations: { periodo: true },
-      order: { fechaInicio: 'ASC', id: 'ASC' },
+      order: { id: 'ASC' },
     });
   }
 
   async findOne(id: number): Promise<CalendarioAcademico> {
-    const evento = await this.calendarioRepository.findOne({
+    const calendario = await this.calendarioAcademicoRepository.findOne({
       where: { id },
       relations: { periodo: true },
     });
 
-    if (!evento) {
-      throw new NotFoundException(`No existe el evento académico con ID ${id}.`);
+    if (!calendario) {
+      throw new NotFoundException(`Calendario académico con ID ${id} no encontrado.`);
     }
 
-    return evento;
+    return calendario;
   }
 
-  async create(createCalendarioDto: CreateCalendarioAcademicoDto): Promise<CalendarioAcademico> {
-    const periodo = await this.findActivePeriod(createCalendarioDto.periodoId);
-    const fechaInicio = new Date(createCalendarioDto.fechaInicio);
-    const fechaFin = new Date(createCalendarioDto.fechaFin);
+  async update(
+    id: number,
+    updateCalendarioAcademicoDto: UpdateCalendarioAcademicoDto,
+  ): Promise<CalendarioAcademico> {
+    const calendario = await this.findOne(id);
 
-    this.validateDateRange(fechaInicio, fechaFin);
-    this.validateEventWithinPeriod(fechaInicio, fechaFin, periodo);
+    if (
+      updateCalendarioAcademicoDto.periodoId &&
+      updateCalendarioAcademicoDto.periodoId !== calendario.periodoId
+    ) {
+      // validación de relación del período se puede extender si se requiere
+    }
 
-    const evento = this.calendarioRepository.create({
-      ...createCalendarioDto,
-      fechaInicio,
-      fechaFin,
-      periodo,
-    });
-
-    return this.calendarioRepository.save(evento);
-  }
-
-  async update(id: number, updateCalendarioDto: UpdateCalendarioAcademicoDto): Promise<CalendarioAcademico> {
-    const evento = await this.findOne(id);
-    const periodoId = updateCalendarioDto.periodoId ?? evento.periodoId;
-    const periodo = await this.findActivePeriod(periodoId);
-    const fechaInicio = updateCalendarioDto.fechaInicio
-      ? new Date(updateCalendarioDto.fechaInicio)
-      : evento.fechaInicio;
-    const fechaFin = updateCalendarioDto.fechaFin ? new Date(updateCalendarioDto.fechaFin) : evento.fechaFin;
-
-    this.validateDateRange(fechaInicio, fechaFin);
-    this.validateEventWithinPeriod(fechaInicio, fechaFin, periodo);
-
-    Object.assign(evento, updateCalendarioDto, {
-      periodoId,
-      periodo,
-      fechaInicio,
-      fechaFin,
-    });
-
-    return this.calendarioRepository.save(evento);
+    Object.assign(calendario, updateCalendarioAcademicoDto);
+    return this.calendarioAcademicoRepository.save(calendario);
   }
 
   async remove(id: number): Promise<void> {
-    const evento = await this.findOne(id);
-    await this.calendarioRepository.remove(evento);
-  }
-
-  private async findActivePeriod(id: number): Promise<PeriodoAcademico> {
-    const periodo = await this.periodosRepository.findOne({ where: { id } });
-
-    if (!periodo) {
-      throw new NotFoundException(`No existe el período académico con ID ${id}.`);
-    }
-
-    if (periodo.estado !== EstadoPeriodoAcademico.ACTIVO) {
-      throw new BadRequestException('El evento solo puede asociarse a un período académico activo.');
-    }
-
-    return periodo;
-  }
-
-  private validateDateRange(fechaInicio: Date, fechaFin: Date): void {
-    if (Number.isNaN(fechaInicio.getTime()) || Number.isNaN(fechaFin.getTime())) {
-      throw new BadRequestException('Las fechas del evento deben ser válidas.');
-    }
-
-    if (fechaInicio > fechaFin) {
-      throw new BadRequestException('La fecha de inicio debe ser anterior o igual a la fecha de fin.');
-    }
-  }
-
-  private validateEventWithinPeriod(
-    fechaInicio: Date,
-    fechaFin: Date,
-    periodo: PeriodoAcademico,
-  ): void {
-    if (fechaInicio < periodo.fechaInicio || fechaFin > periodo.fechaFin) {
-      throw new BadRequestException(
-        'Las fechas del evento deben estar dentro del rango del período académico.',
-      );
-    }
+    const calendario = await this.findOne(id);
+    await this.calendarioAcademicoRepository.remove(calendario);
   }
 }

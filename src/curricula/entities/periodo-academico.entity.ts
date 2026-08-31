@@ -5,7 +5,7 @@ import { EstadoPeriodoAcademico } from '../enums/academico.enums';
 
 @Entity('periodos_academicos')
 export class PeriodoAcademico {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
   id: number;
 
   @Column({ type: 'varchar', length: 30, unique: true })
