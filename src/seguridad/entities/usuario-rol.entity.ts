@@ -1,5 +1,5 @@
 import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
-import { Rol } from '../rol/rol.entity';
+import { Rol } from './rol.entity';
 import { Usuario } from './usuario.entity';
 
 @Entity('usuarios_roles')

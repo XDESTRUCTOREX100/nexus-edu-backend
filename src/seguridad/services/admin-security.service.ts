@@ -6,10 +6,10 @@ import { CrearParametroGlobalDto } from '../dto/parametros/crear-parametro-globa
 import { CrearPermisoDto } from '../dto/permisos/crear-permiso.dto';
 import { CrearRolDto } from '../dto/rol/crear-rol.dto';
 import { CrearUsuarioDto } from '../dto/usuario/crear-usuario.dto';
-import { ParametroGlobal } from '../entities/parametros/parametro-global.entity';
-import { Permiso } from '../entities/permisos/permiso.entity';
-import { Rol } from '../entities/rol/rol.entity';
-import { Usuario } from '../entities/usuario/usuario.entity';
+import { ParametroGlobal } from '../entities/parametro-global.entity';
+import { Permiso } from '../entities/permiso.entity';
+import { Rol } from '../entities/rol.entity';
+import { Usuario } from '../entities/usuario.entity';
 
 @Injectable()
 export class AdminSecurityService {
