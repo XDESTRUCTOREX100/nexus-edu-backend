@@ -1,14 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcryptjs';
 import { CrearParametroGlobalDto } from '../dto/parametros/crear-parametro-global.dto';
 import { CrearPermisoDto } from '../dto/permisos/crear-permiso.dto';
 import { CrearRolDto } from '../dto/rol/crear-rol.dto';
 import { CrearUsuarioDto } from '../dto/usuario/crear-usuario.dto';
-import { ParametroGlobal } from '../entities/parametros/parametro-global.entity';
-import { Permiso } from '../entities/permisos/permiso.entity';
-import { Rol } from '../entities/rol/rol.entity';
-import { Usuario } from '../entities/usuario/usuario.entity';
+import { ParametroGlobal } from '../entities/parametro-global.entity';
+import { Permiso } from '../entities/permiso.entity';
+import { Rol } from '../entities/rol.entity';
+import { Usuario } from '../entities/usuario.entity';
 
 @Injectable()
 export class AdminSecurityService {
@@ -21,10 +22,11 @@ export class AdminSecurityService {
   ) {}
 
   async createUser(dto: CrearUsuarioDto) {
+    const passwordHash = await bcrypt.hash(dto.password, 10);
     const usuario = this.usuarios.create({
       email: dto.email,
       nombre: dto.nombre,
-      passwordHash: dto.password,
+      passwordHash,
       activo: dto.activo ?? true,
     });
     return this.usuarios.save(usuario);

@@ -1,10 +1,5 @@
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { RefreshToken } from '../refresh-token.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { RefreshToken } from './refresh-token.entity';
 import { UsuarioRol } from './usuario-rol.entity';
 
 @Entity('usuarios')
