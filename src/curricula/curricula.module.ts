@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SeguridadModule } from '../seguridad/seguridad.module';
 import { Asignatura } from './entities/asignatura.entity';
 import { CalendarioAcademico } from './entities/calendario-academico.entity';
 import { EspacioFisico } from './entities/espacio-fisico.entity';
@@ -21,9 +22,12 @@ import { EspacioFisicoService } from './services/espacio-fisico.service';
 import { PeriodoAcademicoService } from './services/periodo-academico.service';
 import { CalendarioAcademicoService } from './services/calendario-academico.service';
 import { HorarioService } from './services/horario.service';
+import { JwtAuthGuard } from '../seguridad/common/jwt-auth.guard';
+import { RolesGuard } from '../seguridad/common/roles.guard';
 
 @Module({
   imports: [
+    SeguridadModule,
     TypeOrmModule.forFeature([
       PlanEstudio,
       Asignatura,
@@ -44,6 +48,8 @@ import { HorarioService } from './services/horario.service';
     HorarioController,
   ],
   providers: [
+    JwtAuthGuard,
+    RolesGuard,
     PlanEstudioService,
     AsignaturaService,
     PrerrequisitoService,

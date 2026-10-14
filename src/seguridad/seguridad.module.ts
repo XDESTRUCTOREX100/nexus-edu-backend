@@ -43,6 +43,6 @@ import { SecurityBootstrapService } from './services/security-bootstrap.service'
     RolesGuard,
     SecurityBootstrapService,
   ],
-  exports: [AuthService, JwtAuthGuard, RolesGuard],
+  exports: [AuthService, JwtAuthGuard, RolesGuard, JwtModule],
 })
 export class SeguridadModule {}
