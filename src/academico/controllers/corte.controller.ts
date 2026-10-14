@@ -8,7 +8,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { CorteService } from './corte.service';
+import { CorteService } from '../services/corte.service';
 import { CreateCorteDto } from '../dto/corte/create-corte.dto';
 import { UpdateCorteDto } from '../dto/corte/update-corte.dto';
 

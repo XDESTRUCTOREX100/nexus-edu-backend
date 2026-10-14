@@ -1,5 +1,5 @@
 import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
-import { Permiso } from '../permisos/permiso.entity';
+import { Permiso } from './permiso.entity';
 import { Rol } from './rol.entity';
 
 @Entity('roles_permisos')

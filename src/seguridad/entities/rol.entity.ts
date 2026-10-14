@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { RolPermiso } from './rol-permiso.entity';
-import { UsuarioRol } from '../usuario/usuario-rol.entity';
+import { UsuarioRol } from './usuario-rol.entity';
 
 @Entity('roles')
 export class Rol {

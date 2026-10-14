@@ -8,7 +8,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { CalificacionService } from './calificacion.service';
+import { CalificacionService } from '../services/calificacion.service';
 import { CreateCalificacionDto } from '../dto/calificacion/create-calificacion.dto';
 import { UpdateCalificacionDto } from '../dto/calificacion/update-calificacion.dto';
 

@@ -8,7 +8,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { InscripcionService } from './inscripcion.service';
+import { InscripcionService } from '../services/inscripcion.service';
 import { CreateInscripcionDto } from '../dto/inscripcion/create-inscripcion.dto';
 import { UpdateInscripcionDto } from '../dto/inscripcion/update-inscripcion.dto';
 

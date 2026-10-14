@@ -1,10 +1,5 @@
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { RefreshToken } from '../refresh-token.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { RefreshToken } from './refresh-token.entity';
 import { UsuarioRol } from './usuario-rol.entity';
 
 @Entity('usuarios')
@@ -17,6 +12,9 @@ export class Usuario {
 
   @Column({ type: 'varchar', length: 150 })
   nombre!: string;
+
+  @Column({ type: 'varchar', length: 50, unique: true, nullable: true })
+  identificacion?: string | null;
 
   @Column({ name: 'password_hash', type: 'varchar', length: 255 })
   passwordHash!: string;

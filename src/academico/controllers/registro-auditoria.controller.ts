@@ -7,7 +7,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { RegistroAuditoriaService } from './registro-auditoria.service';
+import { RegistroAuditoriaService } from '../services/registro-auditoria.service';
 import { CreateRegistroAuditoriaDto } from '../dto/registro-auditoria/create-registro-auditoria.dto';
 
 @Controller('academico/registros-auditoria')
