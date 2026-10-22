@@ -9,6 +9,10 @@ import { Corte } from './entities/corte.entity';
 import { Inscripcion } from './entities/inscripcion.entity';
 import { Matricula } from './entities/matricula.entity';
 import { RegistroAuditoria } from './entities/registro-auditoria.entity';
+import { VwEstudiantesBajoRendimiento } from './entities/vw-estudiantes-bajo-rendimiento.entity';
+import { SeguridadModule } from '../seguridad/seguridad.module';
+import { JwtAuthGuard } from '../seguridad/common/jwt-auth.guard';
+import { RolesGuard } from '../seguridad/common/roles.guard';
 
 // Controllers
 import { ActividadController } from './controllers/actividad.controller';
@@ -38,7 +42,9 @@ import { RegistroAuditoriaService } from './services/registro-auditoria.service'
       Inscripcion,
       Matricula,
       RegistroAuditoria,
+      VwEstudiantesBajoRendimiento,
     ]),
+    SeguridadModule,
   ],
   controllers: [
     ActividadController,
@@ -50,6 +56,8 @@ import { RegistroAuditoriaService } from './services/registro-auditoria.service'
     RegistroAuditoriaController,
   ],
   providers: [
+    JwtAuthGuard,
+    RolesGuard,
     ActividadService,
     AsistenciaService,
     CalificacionService,

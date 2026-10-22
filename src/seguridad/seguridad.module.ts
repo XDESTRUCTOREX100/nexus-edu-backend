@@ -17,6 +17,7 @@ import { AdminSecurityService } from './services/admin-security.service';
 import { AuditService } from './services/audit.service';
 import { AuthService } from './services/auth.service';
 import { SecurityBootstrapService } from './services/security-bootstrap.service';
+import { StudentAccountService } from './services/student-account.service';
 
 @Module({
   imports: [
@@ -42,7 +43,14 @@ import { SecurityBootstrapService } from './services/security-bootstrap.service'
     JwtAuthGuard,
     RolesGuard,
     SecurityBootstrapService,
+    StudentAccountService,
   ],
-  exports: [AuthService, JwtAuthGuard, RolesGuard, JwtModule],
+  exports: [
+    AuthService,
+    JwtAuthGuard,
+    RolesGuard,
+    JwtModule,
+    StudentAccountService,
+  ],
 })
 export class SeguridadModule {}

@@ -49,6 +49,7 @@ export class AdminSecurityService {
       const usuario = await usuarios.save(
         usuarios.create({
           email: dto.email,
+          username: dto.identificacion,
           nombre: dto.nombre,
           identificacion: dto.identificacion,
           passwordHash,

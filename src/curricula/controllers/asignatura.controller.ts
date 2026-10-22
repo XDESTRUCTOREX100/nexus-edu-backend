@@ -22,7 +22,7 @@ export class AsignaturaController {
   constructor(private readonly asignaturaService: AsignaturaService) {}
 
   @Post()
-  @Roles('ADMIN', 'DOCENTE', 'administrador')
+  @Roles('ADMIN', 'administrador')
   create(@Body() createAsignaturaDto: CreateAsignaturaDto) {
     return this.asignaturaService.create(createAsignaturaDto);
   }
@@ -40,7 +40,7 @@ export class AsignaturaController {
   }
 
   @Patch(':id')
-  @Roles('ADMIN', 'DOCENTE', 'administrador')
+  @Roles('ADMIN', 'COORDINADOR', 'administrador')
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateAsignaturaDto: UpdateAsignaturaDto,
