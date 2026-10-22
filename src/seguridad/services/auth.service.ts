@@ -27,8 +27,15 @@ export class AuthService {
 
   async login(loginDto: LoginDto, ip: string) {
     void ip;
+    const identifier = loginDto.username ?? loginDto.email;
+    if (!identifier) {
+      throw new UnauthorizedException('Credenciales invalidas');
+    }
     const usuario = await this.usuarios.findOne({
-      where: { email: loginDto.email },
+      where: [
+        { email: identifier },
+        { username: identifier },
+      ],
       relations: {
         usuariosRoles: { rol: { rolesPermisos: { permiso: true } } },
       },

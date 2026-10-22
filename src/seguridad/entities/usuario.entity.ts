@@ -7,8 +7,11 @@ export class Usuario {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'varchar', length: 150, unique: true })
-  email!: string;
+  @Column({ type: 'varchar', length: 150, unique: true, nullable: true })
+  email!: string | null;
+
+  @Column({ type: 'varchar', length: 100, unique: true, nullable: true })
+  username?: string | null;
 
   @Column({ type: 'varchar', length: 150 })
   nombre!: string;

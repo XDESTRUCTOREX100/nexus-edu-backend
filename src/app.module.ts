@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CurriculaModule } from './curricula/curricula.module';
 import { AcademicoModule } from './academico/academico.module';
 import { SeguridadModule } from './seguridad/seguridad.module';
+import { AuditoriaTriggers1700000000000 } from './database/migrations/1700000000000-AuditoriaTriggers';
+import { MigrationRunnerService } from './database/migration-runner.service';
 
 @Module({
   imports: [
@@ -16,11 +18,13 @@ import { SeguridadModule } from './seguridad/seguridad.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       autoLoadEntities: true,
+      migrations: [AuditoriaTriggers1700000000000],
       synchronize: true, // Desactivar en producción
     }),
     CurriculaModule,
     AcademicoModule,
     SeguridadModule,
   ],
+  providers: [MigrationRunnerService],
 })
 export class AppModule {}
