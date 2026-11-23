@@ -1,5 +1,12 @@
 import { Type } from 'class-transformer';
-import { IsEnum, IsInt, IsNotEmpty, IsString, Length, Min } from 'class-validator';
+import {
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsString,
+  Length,
+  Min,
+} from 'class-validator';
 import { TipoEspacioFisico } from '../enums/academico.enums';
 
 export class CreateEspacioFisicoDto {

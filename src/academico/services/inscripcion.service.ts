@@ -12,7 +12,9 @@ export class InscripcionService {
     private readonly inscripcionRepository: Repository<Inscripcion>,
   ) {}
 
-  async create(createInscripcionDto: CreateInscripcionDto): Promise<Inscripcion> {
+  async create(
+    createInscripcionDto: CreateInscripcionDto,
+  ): Promise<Inscripcion> {
     const inscripcion = this.inscripcionRepository.create(createInscripcionDto);
     return this.inscripcionRepository.save(inscripcion);
   }

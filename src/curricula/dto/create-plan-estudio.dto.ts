@@ -1,4 +1,11 @@
-import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
+import {
+  IsDateString,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 import { EstadoPlanEstudio } from '../enums/academico.enums';
 
 export class CreatePlanEstudioDto {
@@ -12,11 +19,16 @@ export class CreatePlanEstudioDto {
   @Length(1, 150, { message: 'El nombre debe tener entre 1 y 150 caracteres.' })
   nombre: string;
 
-  @IsDateString({}, { message: 'La fecha de aprobación debe ser una fecha ISO válida.' })
+  @IsDateString(
+    {},
+    { message: 'La fecha de aprobación debe ser una fecha ISO válida.' },
+  )
   @IsNotEmpty({ message: 'La fecha de aprobación es obligatoria.' })
   fechaAprobacion: string;
 
-  @IsEnum(EstadoPlanEstudio, { message: 'El estado debe ser ACTIVO o INACTIVO.' })
+  @IsEnum(EstadoPlanEstudio, {
+    message: 'El estado debe ser ACTIVO o INACTIVO.',
+  })
   @IsOptional()
   estado?: EstadoPlanEstudio;
 }

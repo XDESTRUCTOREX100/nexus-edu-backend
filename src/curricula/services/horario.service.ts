@@ -10,6 +10,7 @@ import { UpdateHorarioDto } from '../dto/update-horario.dto';
 import { Horario } from '../entities/horario.entity';
 import { Asignatura } from '../entities/asignatura.entity';
 import { EspacioFisico } from '../entities/espacio-fisico.entity';
+import { DiaSemana } from '../enums/academico.enums';
 
 @Injectable()
 export class HorarioService {
@@ -60,7 +61,10 @@ export class HorarioService {
     return horario;
   }
 
-  async update(id: number, updateHorarioDto: UpdateHorarioDto): Promise<Horario> {
+  async update(
+    id: number,
+    updateHorarioDto: UpdateHorarioDto,
+  ): Promise<Horario> {
     const horario = await this.findOne(id);
 
     const asignaturaId = updateHorarioDto.asignaturaId ?? horario.asignaturaId;
@@ -116,7 +120,7 @@ export class HorarioService {
 
   private async validarSolapamiento(
     asignaturaId: number,
-    diaSemana: string,
+    diaSemana: DiaSemana,
     horaInicio: string,
     horaFin: string,
     espacioFisicoId: number,
@@ -132,7 +136,7 @@ export class HorarioService {
     }
 
     const horariosEnEspacio = await this.horarioRepository.find({
-      where: { diaSemana: diaSemana as any, espacioFisicoId },
+      where: { diaSemana, espacioFisicoId },
     });
 
     const conflictoEspacio = horariosEnEspacio.some(
@@ -150,7 +154,7 @@ export class HorarioService {
     }
 
     const horariosAsignatura = await this.horarioRepository.find({
-      where: { asignaturaId, diaSemana: diaSemana as any },
+      where: { asignaturaId, diaSemana },
     });
 
     const conflictoAsignatura = horariosAsignatura.some(

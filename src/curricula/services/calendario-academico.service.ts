@@ -35,7 +35,9 @@ export class CalendarioAcademicoService {
     });
 
     if (!calendario) {
-      throw new NotFoundException(`Calendario académico con ID ${id} no encontrado.`);
+      throw new NotFoundException(
+        `Calendario académico con ID ${id} no encontrado.`,
+      );
     }
 
     return calendario;

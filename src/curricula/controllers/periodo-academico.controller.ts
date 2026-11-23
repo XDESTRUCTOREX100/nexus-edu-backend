@@ -14,7 +14,9 @@ import { PeriodoAcademicoService } from '../services/periodo-academico.service';
 
 @Controller('curricula/periodos-academicos')
 export class PeriodoAcademicoController {
-  constructor(private readonly periodoAcademicoService: PeriodoAcademicoService) {}
+  constructor(
+    private readonly periodoAcademicoService: PeriodoAcademicoService,
+  ) {}
 
   @Post()
   create(@Body() createPeriodoAcademicoDto: CreatePeriodoAcademicoDto) {

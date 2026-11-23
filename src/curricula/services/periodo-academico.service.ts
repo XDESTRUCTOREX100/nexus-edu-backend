@@ -36,7 +36,9 @@ export class PeriodoAcademicoService {
 
     await this.validarSolapamientoFechas(fechaInicio, fechaFin);
 
-    const periodo = this.periodoAcademicoRepository.create(createPeriodoAcademicoDto);
+    const periodo = this.periodoAcademicoRepository.create(
+      createPeriodoAcademicoDto,
+    );
     return this.periodoAcademicoRepository.save(periodo);
   }
 
@@ -52,7 +54,9 @@ export class PeriodoAcademicoService {
     });
 
     if (!periodo) {
-      throw new NotFoundException(`Periodo académico con ID ${id} no encontrado.`);
+      throw new NotFoundException(
+        `Periodo académico con ID ${id} no encontrado.`,
+      );
     }
 
     return periodo;

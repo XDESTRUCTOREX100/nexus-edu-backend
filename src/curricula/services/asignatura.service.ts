@@ -90,7 +90,10 @@ export class AsignaturaService {
       }
     }
 
-    if (updateAsignaturaDto.codigo && updateAsignaturaDto.codigo !== asignatura.codigo) {
+    if (
+      updateAsignaturaDto.codigo &&
+      updateAsignaturaDto.codigo !== asignatura.codigo
+    ) {
       const duplicate = await this.asignaturaRepository.findOne({
         where: { codigo: updateAsignaturaDto.codigo },
       });

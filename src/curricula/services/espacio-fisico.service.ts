@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
 import { CreateEspacioFisicoDto } from '../dto/create-espacio-fisico.dto';
 import { UpdateEspacioFisicoDto } from '../dto/update-espacio-fisico.dto';
 import { EspacioFisico } from '../entities/espacio-fisico.entity';
+import { DiaSemana } from '../enums/academico.enums';
 
 @Injectable()
 export class EspacioFisicoService {
@@ -16,7 +17,9 @@ export class EspacioFisicoService {
     private readonly espacioFisicoRepository: Repository<EspacioFisico>,
   ) {}
 
-  async create(createEspacioFisicoDto: CreateEspacioFisicoDto): Promise<EspacioFisico> {
+  async create(
+    createEspacioFisicoDto: CreateEspacioFisicoDto,
+  ): Promise<EspacioFisico> {
     const existing = await this.espacioFisicoRepository.findOne({
       where: { codigo: createEspacioFisicoDto.codigo },
     });
@@ -83,7 +86,7 @@ export class EspacioFisicoService {
 
   async consultarDisponibilidad(
     periodoId: number,
-    diaSemana: string,
+    diaSemana: DiaSemana,
     horaInicio: string,
     horaFin: string,
   ): Promise<EspacioFisico[]> {

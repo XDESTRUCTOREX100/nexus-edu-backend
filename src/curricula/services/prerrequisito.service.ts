@@ -18,7 +18,9 @@ export class PrerrequisitoService {
     private readonly asignaturaService: AsignaturaService,
   ) {}
 
-  async create(createPrerrequisitoDto: CreatePrerrequisitoDto): Promise<Prerrequisito> {
+  async create(
+    createPrerrequisitoDto: CreatePrerrequisitoDto,
+  ): Promise<Prerrequisito> {
     await this.asignaturaService.validarPrerrequisito(
       createPrerrequisitoDto.asignaturaId,
       createPrerrequisitoDto.asignaturaPrerrequisitoId,
@@ -27,7 +29,8 @@ export class PrerrequisitoService {
     const existing = await this.prerrequisitoRepository.findOne({
       where: {
         asignaturaId: createPrerrequisitoDto.asignaturaId,
-        asignaturaPrerrequisitoId: createPrerrequisitoDto.asignaturaPrerrequisitoId,
+        asignaturaPrerrequisitoId:
+          createPrerrequisitoDto.asignaturaPrerrequisitoId,
       },
     });
 
@@ -37,7 +40,9 @@ export class PrerrequisitoService {
       );
     }
 
-    const prerrequisito = this.prerrequisitoRepository.create(createPrerrequisitoDto);
+    const prerrequisito = this.prerrequisitoRepository.create(
+      createPrerrequisitoDto,
+    );
     return this.prerrequisitoRepository.save(prerrequisito);
   }
 
