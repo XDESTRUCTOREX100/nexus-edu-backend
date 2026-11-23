@@ -17,7 +17,11 @@ export class PeriodoAcademico {
   @Column({ name: 'fecha_fin', type: 'date' })
   fechaFin: Date;
 
-  @Column({ type: 'enum', enum: EstadoPeriodoAcademico, default: EstadoPeriodoAcademico.INACTIVO })
+  @Column({
+    type: 'enum',
+    enum: EstadoPeriodoAcademico,
+    default: EstadoPeriodoAcademico.INACTIVO,
+  })
   estado: EstadoPeriodoAcademico;
 
   @OneToMany(() => CalendarioAcademico, (calendario) => calendario.periodo)

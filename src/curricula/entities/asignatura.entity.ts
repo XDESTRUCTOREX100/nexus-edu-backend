@@ -1,4 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { PlanEstudio } from './plan-estudio.entity';
 import { Prerrequisito } from './prerrequisito.entity';
 import { Horario } from './horario.entity';
@@ -20,14 +27,19 @@ export class Asignatura {
   @Column({ name: 'plan_estudio_id', type: 'int', unsigned: true })
   planEstudioId: number;
 
-  @ManyToOne(() => PlanEstudio, (planEstudio) => planEstudio.asignaturas, { onDelete: 'RESTRICT' })
+  @ManyToOne(() => PlanEstudio, (planEstudio) => planEstudio.asignaturas, {
+    onDelete: 'RESTRICT',
+  })
   @JoinColumn({ name: 'plan_estudio_id' })
   planEstudio: PlanEstudio;
 
   @OneToMany(() => Prerrequisito, (prerrequisito) => prerrequisito.asignatura)
   prerrequisitos: Prerrequisito[];
 
-  @OneToMany(() => Prerrequisito, (prerrequisito) => prerrequisito.asignaturaPrerrequisito)
+  @OneToMany(
+    () => Prerrequisito,
+    (prerrequisito) => prerrequisito.asignaturaPrerrequisito,
+  )
   esPrerrequisitoDe: Prerrequisito[];
 
   @OneToMany(() => Horario, (horario) => horario.asignatura)

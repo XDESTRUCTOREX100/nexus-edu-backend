@@ -1,4 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Asignatura } from './asignatura.entity';
 import { EspacioFisico } from './espacio-fisico.entity';
 import { PeriodoAcademico } from './periodo-academico.entity';
@@ -27,15 +33,21 @@ export class Horario {
   @Column({ name: 'hora_fin', type: 'time' })
   horaFin: string;
 
-  @ManyToOne(() => Asignatura, (asignatura) => asignatura.horarios, { onDelete: 'RESTRICT' })
+  @ManyToOne(() => Asignatura, (asignatura) => asignatura.horarios, {
+    onDelete: 'RESTRICT',
+  })
   @JoinColumn({ name: 'asignatura_id' })
   asignatura: Asignatura;
 
-  @ManyToOne(() => EspacioFisico, (espacioFisico) => espacioFisico.horarios, { onDelete: 'RESTRICT' })
+  @ManyToOne(() => EspacioFisico, (espacioFisico) => espacioFisico.horarios, {
+    onDelete: 'RESTRICT',
+  })
   @JoinColumn({ name: 'espacio_fisico_id' })
   espacioFisico: EspacioFisico;
 
-  @ManyToOne(() => PeriodoAcademico, (periodo) => periodo.horarios, { onDelete: 'CASCADE' })
+  @ManyToOne(() => PeriodoAcademico, (periodo) => periodo.horarios, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'periodo_id' })
   periodo: PeriodoAcademico;
 }

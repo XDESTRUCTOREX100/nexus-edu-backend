@@ -12,8 +12,12 @@ export class CalificacionService {
     private readonly calificacionRepository: Repository<Calificacion>,
   ) {}
 
-  async create(createCalificacionDto: CreateCalificacionDto): Promise<Calificacion> {
-    const calificacion = this.calificacionRepository.create(createCalificacionDto);
+  async create(
+    createCalificacionDto: CreateCalificacionDto,
+  ): Promise<Calificacion> {
+    const calificacion = this.calificacionRepository.create(
+      createCalificacionDto,
+    );
     return this.calificacionRepository.save(calificacion);
   }
 

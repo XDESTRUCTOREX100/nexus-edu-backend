@@ -8,6 +8,7 @@ import { Rol } from './entities/rol.entity';
 import { UsuarioRol } from './entities/usuario-rol.entity';
 import { Usuario } from './entities/usuario.entity';
 import { RefreshToken } from './entities/refresh-token.entity';
+import { RegistroAuditoria } from './entities/registro-auditoria.entity';
 import { AdminSecurityController } from './controllers/admin-security.controller';
 import { AuditController } from './controllers/audit.controller';
 import { AuthController } from './controllers/auth.controller';
@@ -28,6 +29,7 @@ import { SecurityBootstrapService } from './services/security-bootstrap.service'
       UsuarioRol,
       ParametroGlobal,
       RefreshToken,
+      RegistroAuditoria,
     ]),
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'cambia-esta-clave-en-produccion',
@@ -43,6 +45,6 @@ import { SecurityBootstrapService } from './services/security-bootstrap.service'
     RolesGuard,
     SecurityBootstrapService,
   ],
-  exports: [AuthService, JwtAuthGuard, RolesGuard],
+  exports: [AuthService, AuditService, JwtAuthGuard, RolesGuard],
 })
 export class SeguridadModule {}

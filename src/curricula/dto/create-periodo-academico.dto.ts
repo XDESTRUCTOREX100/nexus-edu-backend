@@ -1,4 +1,11 @@
-import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
+import {
+  IsDateString,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 import { EstadoPeriodoAcademico } from '../enums/academico.enums';
 
 export class CreatePeriodoAcademicoDto {
@@ -15,7 +22,9 @@ export class CreatePeriodoAcademicoDto {
   @IsNotEmpty({ message: 'La fecha de fin es obligatoria.' })
   fechaFin: string;
 
-  @IsEnum(EstadoPeriodoAcademico, { message: 'El estado debe ser ACTIVO o INACTIVO.' })
+  @IsEnum(EstadoPeriodoAcademico, {
+    message: 'El estado debe ser ACTIVO o INACTIVO.',
+  })
   @IsOptional()
   estado?: EstadoPeriodoAcademico;
 }

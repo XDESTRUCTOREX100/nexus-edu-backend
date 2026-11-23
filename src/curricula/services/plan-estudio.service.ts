@@ -16,7 +16,9 @@ export class PlanEstudioService {
     private readonly planEstudioRepository: Repository<PlanEstudio>,
   ) {}
 
-  async create(createPlanEstudioDto: CreatePlanEstudioDto): Promise<PlanEstudio> {
+  async create(
+    createPlanEstudioDto: CreatePlanEstudioDto,
+  ): Promise<PlanEstudio> {
     const existingPlan = await this.planEstudioRepository.findOne({
       where: { codigo: createPlanEstudioDto.codigo },
     });
@@ -45,7 +47,9 @@ export class PlanEstudioService {
     });
 
     if (!planEstudio) {
-      throw new NotFoundException(`Plan de estudio con ID ${id} no encontrado.`);
+      throw new NotFoundException(
+        `Plan de estudio con ID ${id} no encontrado.`,
+      );
     }
 
     return planEstudio;
@@ -57,7 +61,10 @@ export class PlanEstudioService {
   ): Promise<PlanEstudio> {
     const planEstudio = await this.findOne(id);
 
-    if (updatePlanEstudioDto.codigo && updatePlanEstudioDto.codigo !== planEstudio.codigo) {
+    if (
+      updatePlanEstudioDto.codigo &&
+      updatePlanEstudioDto.codigo !== planEstudio.codigo
+    ) {
       const duplicatedCode = await this.planEstudioRepository.findOne({
         where: { codigo: updatePlanEstudioDto.codigo },
       });

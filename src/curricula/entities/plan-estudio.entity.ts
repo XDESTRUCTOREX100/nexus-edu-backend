@@ -16,7 +16,11 @@ export class PlanEstudio {
   @Column({ type: 'date' })
   fechaAprobacion: Date;
 
-  @Column({ type: 'enum', enum: EstadoPlanEstudio, default: EstadoPlanEstudio.ACTIVO })
+  @Column({
+    type: 'enum',
+    enum: EstadoPlanEstudio,
+    default: EstadoPlanEstudio.ACTIVO,
+  })
   estado: EstadoPlanEstudio;
 
   @OneToMany(() => Asignatura, (asignatura) => asignatura.planEstudio)

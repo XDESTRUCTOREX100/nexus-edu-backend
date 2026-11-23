@@ -1,4 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { PeriodoAcademico } from './periodo-academico.entity';
 
 @Entity('calendario_academico')
@@ -18,7 +24,9 @@ export class CalendarioAcademico {
   @Column({ name: 'fecha_fin', type: 'date' })
   fechaFin: Date;
 
-  @ManyToOne(() => PeriodoAcademico, (periodo) => periodo.calendario, { onDelete: 'CASCADE' })
+  @ManyToOne(() => PeriodoAcademico, (periodo) => periodo.calendario, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'periodo_id' })
   periodo: PeriodoAcademico;
 }

@@ -38,7 +38,10 @@ export class CalendarioAcademicoController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateCalendarioAcademicoDto: UpdateCalendarioAcademicoDto,
   ) {
-    return this.calendarioAcademicoService.update(id, updateCalendarioAcademicoDto);
+    return this.calendarioAcademicoService.update(
+      id,
+      updateCalendarioAcademicoDto,
+    );
   }
 
   @Delete(':id')
